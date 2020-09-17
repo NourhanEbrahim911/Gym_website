@@ -1,0 +1,121 @@
+
+<html>
+    <head>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Bangers);
+            .trainer{
+                text-shadow: 3px 3px;
+            }
+            #photoShow{ border: 5px solid #fff;height: 310px;margin: 0px auto;width: 310px;box-shadow: 0px 0px 25px black}
+            #photoShow div{position: absolute;z-index: 0}
+            #photoShow div.previous{z-index: 1}
+            #photoShow div.current{z-index: 2}
+        </style>
+    </head>
+    <body>
+        <div class="bg-info p-4">
+        <h5 class="display-3 text-center trainer mb-4">Our Classes</h5>
+        <div id="photoShow">
+            <div class="current"><img src="class1.jpg" style="width:300;height:300"/></div>
+            <div><img src="class2.jpg" style="width:300;height:300"/></div>
+            <div><img src="class4.jpg" style="width:300;height:300"/></div>
+            <div><img src="class5.jpg" style="width:300;height:300"/></div>
+            <div><img src="class6.jpg" style="width:300;height:300"/></div>
+            <div><img src="class7.jpg" style="width:300;height:300"/></div>
+        </div>
+            <div class="row bg-info p-3">
+                <button type="button" class="btn btn-md bg-inverse text-white mx-auto" data-toggle="modal" data-target="#myclass">Reserve your place!</button>
+            </div>
+            
+            <div class="modal fade" id="myclass">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-faded">
+                            <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                    </button>
+                                    <h4 class="mx-auto">Reservation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Your name" class="form-control mb-1" id="name"/>
+                            <input type="email" placeholder="Your email" class="form-control mb-1" required/>
+                            <select class="form-control mb-1">
+                                <option>Zomba</option>
+                                <option>Aerobics</option>
+                                <option>Tango</option>
+                                <option>Salsa</option>
+                                <option>Sawna</option>
+                            </select>
+                            
+                        </div>
+                            
+                        
+                        
+                        <div class="modal-footer bg-faded">
+                            <button type="button" class="btn btn-primary text-white" id="reserve">Reserve</button>
+                        </div>
+                    </div>
+                    </div>
+                
+                </div>
+            
+            </div>
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js'></script>
+        
+        <script>
+            $(document).ready(function(){
+                
+                setInterval(rotateImages,4000);
+                
+                
+             
+            });
+            
+            function rotateImages(){
+                var curPhoto=$("#photoShow div.current");
+                var nxtPhoto= curPhoto.next();
+                
+                if(nxtPhoto.length==0){
+                    nxtPhoto=$("#photoShow div:first");
+                }
+                
+                curPhoto.removeClass("current").addClass("previous");
+                nxtPhoto.css({opacity:0.0}).addClass("current").animate({opacity:1.0},1000,
+                    function(){
+                    curPhoto.removeClass("previous");
+                });
+                }
+        </script>
+        <script>
+        $(document).ready(function(){
+            $("#reserve").click(function(){
+                    if($("#name").val()==""){
+                        alert("please enter your name!");
+                    }else{
+                            var user={"username":$("#name").val()};
+                            var userr=JSON.stringify(user);
+                            localStorage.setItem('users',userr);
+                            
+                            var hams=JSON.parse(localStorage.getItem('users'));
+                            alert(hams.username +  ",You are welcomed");
+                        }
+                    });
+            
+            
+        });
+    
+    
+    </script>
+    </body>
+
+
+
+</html>
+
